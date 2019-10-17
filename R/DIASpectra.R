@@ -24,6 +24,7 @@ setMethod(
     }
 
     xr <- xcmsRaw(fp.smp, includeMSn = TRUE)
+    cat("step 1 \n")
     scantime.ms1 <- xr@scantime
     mz.range <- xr@mzrange
 
@@ -31,6 +32,7 @@ setMethod(
       getScan(xr, idx)
     })
     xr.ms2 <- msn2xcmsRaw(xr)
+    cat("step 2 \n")
     scantime.ms2 <- xr.ms2@scantime
     scan.ms2 <- lapply(seq_along(xr.ms2@scantime) , function(idx) {
       getScan(xr.ms2, idx)
@@ -54,6 +56,7 @@ setMethod(
       rt.info$rtmin.ext <- rt.info$rtmin
       rt.info$rtmax.ext <- rt.info$rtmax
     }
+    cat("step 3 \n")
     info.all <- lapply(seq.pg, function(idx.pg) {
       idx.ms1.raw <- idx.ms1 <- which(scantime.ms1 >= rt.info[idx.pg, 'rtmin'] &
                                         scantime.ms1 <= rt.info[idx.pg, 'rtmax'])
@@ -148,4 +151,5 @@ setMethod(
       spec.decon
     })
     obj@spectra <- info.all
+    cat("step 4 \n")
   })
