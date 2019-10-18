@@ -54,7 +54,7 @@ setMethod(
       rt.info$rtmax.ext <- rt.info$rtmax
     }
     cat('start lapply\n')
-    info.all <- lapply(seq.pg, function(idx.pg) {
+    info.all <- for(idx.pg in seq.pg) {
       idx.ms1.raw <- idx.ms1 <- which(scantime.ms1 >= rt.info[idx.pg, 'rtmin'] &
                                         scantime.ms1 <= rt.info[idx.pg, 'rtmax'])
 
@@ -150,8 +150,8 @@ setMethod(
                                  snthr = snthr, isFWHM = isFWHM,
                                  is.dec.all = is.dec.all,
                                  is.dec.smoothed = is.dec.smoothed)
-      if (idx.pg%%100==0) {
-        cat("\n finish",idx.pg/length(seq.pg))
+      if (idx.pg%%10==0) {
+        cat("\n finish",idx.pg,"__",idx.pg/length(seq.pg))
       }
 
       return(spec.decon)
