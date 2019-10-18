@@ -53,7 +53,6 @@ setMethod(
       rt.info$rtmin.ext <- rt.info$rtmin
       rt.info$rtmax.ext <- rt.info$rtmax
     }
-    count<-0
     cat('start lapply\n')
     info.all <- lapply(seq.pg, function(idx.pg) {
       idx.ms1.raw <- idx.ms1 <- which(scantime.ms1 >= rt.info[idx.pg, 'rtmin'] &
@@ -142,7 +141,6 @@ setMethod(
                                 'simp' = FALSE)
       rownames(info.pk.ms1) <- 0
       nm.smp <- gsub('(?i)\\.mzxml', '', basename(fp.smp))
-      count<-count+1
       spec.decon <- DecoSpectra(idx.pg,nm.smp, ms2.eic.ext, peak.ms1.smooth,
                                  length(idx.ms2.ext),
                                  idx.apex.eic = idx.apex.ms1,
@@ -152,9 +150,8 @@ setMethod(
                                  snthr = snthr, isFWHM = isFWHM,
                                  is.dec.all = is.dec.all,
                                  is.dec.smoothed = is.dec.smoothed)
-      cat(idx.pg)
       if (idx.pg%%100==0) {
-        cat("\n finish",count/length(seq.pg))
+        cat("\n finish",idx.pg/length(seq.pg))
       }
 
       return(spec.decon)
