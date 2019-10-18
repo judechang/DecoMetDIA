@@ -152,6 +152,7 @@ setMethod(
                                  snthr = snthr, isFWHM = isFWHM,
                                  is.dec.all = is.dec.all,
                                  is.dec.smoothed = is.dec.smoothed)
+      cat(count)
       if (count%%100==0) {
         cat("\n finish",count/length(seq.pg))
       }
