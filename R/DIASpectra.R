@@ -155,6 +155,6 @@ setMethod(
       }
 
       return(spec.decon)
-    })
+    }
     obj@spectra <- info.all
   })
