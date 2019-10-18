@@ -54,7 +54,8 @@ setMethod(
       rt.info$rtmax.ext <- rt.info$rtmax
     }
     cat('start lapply\n')
-    info.all <- for(idx.pg in seq.pg) {
+    info.all <- data.frame()
+    for(idx.pg in seq.pg) {
       idx.ms1.raw <- idx.ms1 <- which(scantime.ms1 >= rt.info[idx.pg, 'rtmin'] &
                                         scantime.ms1 <= rt.info[idx.pg, 'rtmax'])
 
@@ -154,7 +155,7 @@ setMethod(
         cat("\n finish",idx.pg,"__",idx.pg/length(seq.pg))
       }
 
-      return(spec.decon)
+      info.all<-cbind(info.all,spec.decon)
     }
     obj@spectra <- info.all
   })
